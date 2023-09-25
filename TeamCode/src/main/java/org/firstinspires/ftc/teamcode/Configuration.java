@@ -6,6 +6,11 @@ public class Configuration {
     public final String liftMotor = "lift";
     public final String hangMotor = "hang";
 
+    public final String leftFront = "lf";
+    public final String rightFront = "rf";
+    public final String leftRear = "lr";
+    public final String rightRear = "rr";
+
     // Servos
     public final String clawServo = "claw";
     public final String clawArmServo = "clawArm";

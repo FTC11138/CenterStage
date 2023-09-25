@@ -23,20 +23,40 @@ public class Attachments extends SampleMecanumDrive {
 
     public void initialize(HardwareMap hardwareMap, Telemetry telemetry_) {
 
-        initializeRoadrunner(hardwareMap);
         // Random Stuff IDK
         telemetry = telemetry_;
         FtcDashboard dashboard = FtcDashboard.getInstance();
 
-        // Motors
-        liftMotor = hardwareMap.get(DcMotorEx.class, names.liftMotor);
-        hangMotor = hardwareMap.get(DcMotorEx.class, names.hangMotor);
 
-        // Servos
-        clawServo = hardwareMap.get(Servo.class, names.clawServo);
-        clawArmServo = hardwareMap.get(Servo.class, names.clawArmServo);
-        planeServo = hardwareMap.get(Servo.class, names.planeServo);
+        // Initialize Roadrunner
+        initializeRoadrunner(hardwareMap);
 
-        webcam = hardwareMap.get(WebcamName.class, names.webcam);
+        telemetry.addLine("Roadrunner Initialized");
+        telemetry.update();
+
+
+//        // Motors
+//        liftMotor = hardwareMap.get(DcMotorEx.class, names.liftMotor);
+//        hangMotor = hardwareMap.get(DcMotorEx.class, names.hangMotor);
+//
+//        telemetry.addLine("Motors Initialized");
+//        telemetry.update();
+//
+//
+//        // Servos
+//        clawServo = hardwareMap.get(Servo.class, names.clawServo);
+//        clawArmServo = hardwareMap.get(Servo.class, names.clawArmServo);
+//        planeServo = hardwareMap.get(Servo.class, names.planeServo);
+//
+//        telemetry.addLine("Servos Initialized");
+//        telemetry.update();
+//
+//
+//        // Camera
+//        webcam = hardwareMap.get(WebcamName.class, names.webcam);
+//
+//        telemetry.addLine("Camera Initialized");
+//        telemetry.update();
+
     }
 }

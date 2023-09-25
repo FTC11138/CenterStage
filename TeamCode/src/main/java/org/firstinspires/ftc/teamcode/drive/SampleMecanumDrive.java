@@ -21,6 +21,7 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
@@ -110,10 +111,13 @@ public class SampleMecanumDrive extends MecanumDrive {
                 DriveConstants.LOGO_FACING_DIR, DriveConstants.USB_FACING_DIR));
         imu.initialize(parameters);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, names.leftFront);
+        leftRear = hardwareMap.get(DcMotorEx.class, names.leftRear);
+        rightRear = hardwareMap.get(DcMotorEx.class, names.rightRear);
+        rightFront = hardwareMap.get(DcMotorEx.class, names.rightFront);
+
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
@@ -303,6 +307,68 @@ public class SampleMecanumDrive extends MecanumDrive {
         rightRear.setPower(v2);
         rightFront.setPower(v3);
     }
+
+
+
+
+
+
+
+    public void drive(double direction, double velocity, double rotationVelocity) {
+        Wheels w = getWheels(direction, velocity, rotationVelocity);
+        leftFront.setPower(w.lf);
+        rightFront.setPower(w.rf);
+        leftRear.setPower(w.lr);
+        rightRear.setPower(w.rr);
+        //telemetry.addData("Powers", String.format(Locale.US, "lf %.2f lr %.2f rf %.2f rr %.2f", w.lf, w.lr, w.rf, w.rr));
+    }
+
+    private static class Wheels {
+        double lf, lr, rf, rr;
+
+        Wheels(double lf, double rf, double lr, double rr) {
+            this.lf = lf;
+            this.rf = rf;
+            this.lr = lr;
+            this.rr = rr;
+        }
+    }
+
+    private Wheels getWheels(double direction, double velocity, double rotationVelocity) {
+        //final double vd = velocity;
+        //final double td = direction;
+        //final double vt = rotationVelocity;
+
+        double s = Math.sin(direction + Math.PI / 4.0);
+        double c = Math.cos(direction + Math.PI / 4.0);
+        double m = Math.max(Math.abs(s), Math.abs(c));
+        s /= m;
+        c /= m;
+
+        final double v1 = velocity * s + rotationVelocity;
+        final double v2 = velocity * c - rotationVelocity;
+        final double v3 = velocity * c + rotationVelocity;
+        final double v4 = velocity * s - rotationVelocity;
+
+        // Ensure that none of the values go over 1.0. If none of the provided values are
+        // over 1.0, just scale by 1.0 and keep all values.
+        double scale = ma(1.0, v1, v2, v3, v4);
+
+        return new Wheels(v1 / scale, v2 / scale, v3 / scale, v4 / scale);
+    }
+
+    private static double ma(double... xs) {
+        double ret = 0.0;
+        for (double x : xs) {
+            ret = Math.max(ret, Math.abs(x));
+        }
+        return ret;
+    }
+
+
+
+
+
 
     @Override
     public double getRawExternalHeading() {
