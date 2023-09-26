@@ -5,10 +5,19 @@ import com.acmerobotics.dashboard.config.Config;
 @Config
 public class Constants {
 
+    /* -------------------------------------------- DRIVE CONSTANTS -------------------------------------------- */
+
     public static double moveSpeed = 1;
     public static double rotSpeed = 1;
 
-    //Vision constants
+
+
+
+
+
+
+    /* -------------------------------------------- VISION CONSTANTS -------------------------------------------- */
+
     public static int rLx = 5;
     public static int rLy = 320;
     public static int rLw = 100;
