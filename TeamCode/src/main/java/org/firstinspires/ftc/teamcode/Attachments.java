@@ -12,8 +12,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.vision.VisionPortal;
 
 public class Attachments extends SampleMecanumDrive {
+
 
     private Telemetry telemetry;
     private ElapsedTime runtime = new ElapsedTime();
@@ -21,6 +23,8 @@ public class Attachments extends SampleMecanumDrive {
     public Servo clawServo, clawArmServo, planeServo;
     public DcMotorEx liftMotor, hangMotor;
     public WebcamName webcam;
+    public VisionProcessor visionProcessor;
+    public VisionPortal visionPortal;
 
     public void initialize(HardwareMap hardwareMap, Telemetry telemetry_, boolean auto) {
 
@@ -40,6 +44,9 @@ public class Attachments extends SampleMecanumDrive {
             setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        } else {
+            visionProcessor = new VisionProcessor();
+            visionPortal = VisionPortal.easyCreateWithDefaults(webcam, visionProcessor);
         }
 
         // Motors
@@ -112,6 +119,20 @@ public class Attachments extends SampleMecanumDrive {
     }
     public double getPlanePosition() {
         return planeServo.getPosition();
+    }
+
+    // Getting Prop Location
+    public int getPropLocation() {
+        VisionProcessor.Selected selection = visionProcessor.getSelection();
+        if (selection == VisionProcessor.Selected.LEFT) {
+            return 1;
+        } else if (selection == VisionProcessor.Selected.MIDDLE) {
+            return 2;
+        } else if (selection == VisionProcessor.Selected.RIGHT) {
+            return 3;
+        } else {
+            return 0;
+        }
     }
 
 

@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.vision.VisionPortal;
 
 public abstract class AutonomousMethods extends LinearOpMode {
 
@@ -17,6 +18,8 @@ public abstract class AutonomousMethods extends LinearOpMode {
     FtcDashboard dashboard = FtcDashboard.getInstance();
     private Orientation angles;
     public ElapsedTime runtime = new ElapsedTime();
+
+
 
 
     public boolean opModeStatus() {
