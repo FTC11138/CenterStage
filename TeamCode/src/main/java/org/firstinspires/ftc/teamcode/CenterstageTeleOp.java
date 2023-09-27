@@ -14,10 +14,7 @@ public class CenterstageTeleOp extends OpMode {
 
     @Override
     public void init() {
-        robot.initialize(hardwareMap, telemetry);
-        robot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.initialize(hardwareMap, telemetry, false);
     }
 
     @Override
