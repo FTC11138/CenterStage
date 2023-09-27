@@ -22,7 +22,7 @@ public class Attachments extends SampleMecanumDrive {
     public DcMotorEx liftMotor, hangMotor;
     public WebcamName webcam;
 
-    public void initialize(HardwareMap hardwareMap, Telemetry telemetry_) {
+    public void initialize(HardwareMap hardwareMap, Telemetry telemetry_, boolean auto) {
 
         // Random Stuff IDK
         telemetry = telemetry_;
@@ -35,6 +35,12 @@ public class Attachments extends SampleMecanumDrive {
         telemetry.addLine("Roadrunner Initialized");
         telemetry.update();
 
+        // Change Drive Motor Modes if not autonomous
+        if (!auto) {
+            setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
 
         // Motors
         liftMotor = hardwareMap.get(DcMotorEx.class, names.liftMotor);
