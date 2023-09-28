@@ -17,6 +17,13 @@ public class Constants {
     public static double slowerSplineVel = 30;
 
 
+    /* -------------------------------------------- SERVO CONSTANTS -------------------------------------------- */
+
+
+    public static double pixelHold = 1;
+    public static double pixelDrop = 0;
+
+
     /* -------------------------------------------- VISION CONSTANTS -------------------------------------------- */
 
     public static int rLx = 5;

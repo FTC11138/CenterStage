@@ -50,6 +50,8 @@ public abstract class AutonomousMethods extends LinearOpMode {
 
         Pose2d startPose = null;
         Vector2d pixelVector = null;
+        Vector2d afterPixel = null;
+        double afterPixelAngle = 0;
         double pixelAngle = 0;
 
 
@@ -57,22 +59,35 @@ public abstract class AutonomousMethods extends LinearOpMode {
             startPose = PoseConstants.redLeft.start;
             pixelVector = (propLocation == 1) ? PoseConstants.redLeft.left : ((propLocation == 2) ? PoseConstants.redLeft.center : PoseConstants.redLeft.right);
             pixelAngle = PoseConstants.redLeft.spikeMarkAngle;
+            afterPixel = PoseConstants.redLeft.afterSpikeMark;
+            afterPixelAngle = PoseConstants.redLeft.afterSpikeMarkAngle;
         } else if (startPosition == "redRight") {
             startPose = PoseConstants.redRight.start;
             pixelVector = (propLocation == 1) ? PoseConstants.redRight.left : ( (propLocation == 2) ? PoseConstants.redRight.center : PoseConstants.redRight.right);
             pixelAngle = PoseConstants.redRight.spikeMarkAngle;
+            afterPixel = PoseConstants.redRight.afterSpikeMark;
+            afterPixelAngle = PoseConstants.redRight.afterSpikeMarkAngle;
         } else if (startPosition == "blueLeft") {
             startPose = PoseConstants.blueLeft.start;
             pixelVector = (propLocation == 1) ? PoseConstants.blueLeft.left : ( (propLocation == 2) ? PoseConstants.blueLeft.center : PoseConstants.blueLeft.right);
             pixelAngle = PoseConstants.blueLeft.spikeMarkAngle;
+            afterPixel = PoseConstants.blueLeft.afterSpikeMark;
+            afterPixelAngle = PoseConstants.blueLeft.afterSpikeMarkAngle;
         } else if (startPosition == "blueRight") {
             startPose = PoseConstants.blueRight.start;
             pixelVector = (propLocation == 1) ? PoseConstants.blueRight.left : ( (propLocation == 2) ? PoseConstants.blueRight.center : PoseConstants.blueRight.right);
             pixelAngle = PoseConstants.blueRight.spikeMarkAngle;
+            afterPixel = PoseConstants.blueRight.afterSpikeMark;
+            afterPixelAngle = PoseConstants.blueRight.afterSpikeMarkAngle;
         }
 
         spikeMarkTraj = robot.trajectoryBuilder(startPose)
                 .splineTo(pixelVector, pixelAngle)
+                .addDisplacementMarker(() -> {
+                    robot.setPixelServo(Constants.pixelDrop);
+                    sleep(500);
+                })
+                .splineTo(afterPixel, afterPixelAngle)
                 .build();
 
         
