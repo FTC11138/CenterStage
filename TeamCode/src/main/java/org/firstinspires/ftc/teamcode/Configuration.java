@@ -15,6 +15,7 @@ public class Configuration {
     public final String clawServo = "claw";
     public final String clawArmServo = "clawArm";
     public final String planeServo = "plane";
+    public final String pixelServo = "pixel";
 
     public final String webcam = "Webcam 1";
 
