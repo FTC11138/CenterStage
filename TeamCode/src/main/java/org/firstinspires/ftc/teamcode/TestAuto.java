@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.config.TrajectoryGroupConfig;
 import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
@@ -18,14 +20,14 @@ public class TestAuto extends AutonomousMethods {
         /* -------------------------------------------- INIT -------------------------------------------- */
         int propLocation;
 
-        Pose2d startPose = new Pose2d(-36, -60, Math.toRadians(90));
-        Pose2d backBoardPose = new Pose2d(40, -36, Math.toRadians(0));
 
         TrajectoryVelocityConstraint splineVelConstraint = new MinVelocityConstraint(Arrays.asList(
                 new TranslationalVelocityConstraint(Constants.slowerSplineVel),
                 new AngularVelocityConstraint(16)
         ));
 
+        PoseConstants.redLeft startPose = new PoseConstants.redLeft();
+        robot.setPoseEstimate(PoseConstants.redLeft.start);
 
 
         // Wait for start button to be pressed
@@ -43,6 +45,11 @@ public class TestAuto extends AutonomousMethods {
 
         dropPixel(propLocation, "redLeft");
 
+        Trajectory backdropTraj = robot.trajectoryBuilder(robot.getPoseEstimate())
+                .splineTo(startPose.backdrop, Math.toRadians(0))
+                .build();
+
+        robot.followTrajectory(backdropTraj);
 
     }
 }

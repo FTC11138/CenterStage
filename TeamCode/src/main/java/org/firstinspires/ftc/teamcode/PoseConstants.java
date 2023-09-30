@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 
+import java.util.Vector;
+
+@Config
 public class PoseConstants {
 
 
@@ -16,9 +20,9 @@ public class PoseConstants {
         public static Vector2d afterSpikeMark = new Vector2d(-31, -36);;
         public static double afterSpikeMarkAngle = Math.toRadians(0);
 
-        public static Pose2d backdrop = new Pose2d(48, -36, Math.toRadians(0));
-        public static Pose2d parkRight = new Pose2d(60, -60, Math.toRadians(0));
-        public static Pose2d parkLeft = new Pose2d(60, -12, Math.toRadians(0));
+        public static Vector2d backdrop = new Vector2d(48, -36);
+        public static Vector2d parkRight = new Vector2d(60, -60);
+        public static Vector2d parkLeft = new Vector2d(60, -12);
     }
 
     public static class redRight {
@@ -31,9 +35,9 @@ public class PoseConstants {
         public static Vector2d afterSpikeMark = new Vector2d(17, -36);;
         public static double afterSpikeMarkAngle = Math.toRadians(0);
 
-        public static Pose2d backdrop = new Pose2d(48, -36, Math.toRadians(0));
-        public static Pose2d parkRight = new Pose2d(60, -60, Math.toRadians(0));
-        public static Pose2d parkLeft = new Pose2d(60, -12, Math.toRadians(0));
+        public static Vector2d backdrop = new Vector2d(48, -36);
+        public static Vector2d parkRight = new Vector2d(60, -60);
+        public static Vector2d parkLeft = new Vector2d(60, -12);
     }
 
     public static class blueLeft {
@@ -46,9 +50,9 @@ public class PoseConstants {
         public static Vector2d afterSpikeMark = new Vector2d(17, 36);;
         public static double afterSpikeMarkAngle = Math.toRadians(0);
 
-        public static Pose2d backdrop = new Pose2d(48, 36, Math.toRadians(0));
-        public static Pose2d parkLeft = new Pose2d(60, 60, Math.toRadians(0));
-        public static Pose2d parkRight = new Pose2d(60, 12, Math.toRadians(0));
+        public static Vector2d backdrop = new Vector2d(48, 36);
+        public static Vector2d parkLeft = new Vector2d(60, 60);
+        public static Vector2d parkRight = new Vector2d(60, 12);
     }
 
     public static class blueRight {
@@ -61,9 +65,9 @@ public class PoseConstants {
         public static Vector2d afterSpikeMark = new Vector2d(-31, 36);;
         public static double afterSpikeMarkAngle = Math.toRadians(0);
 
-        public static Pose2d backdrop = new Pose2d(48, 36, Math.toRadians(0));
-        public static Pose2d parkLeft = new Pose2d(60, 60, Math.toRadians(0));
-        public static Pose2d parkRight = new Pose2d(60, 12, Math.toRadians(0));
+        public static Vector2d backdrop = new Vector2d(48, 36);
+        public static Vector2d parkLeft = new Vector2d(60, 60);
+        public static Vector2d parkRight = new Vector2d(60, 12);
     }
 
 }

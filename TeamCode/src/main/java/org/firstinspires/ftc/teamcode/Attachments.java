@@ -39,19 +39,13 @@ public class Attachments extends SampleMecanumDrive {
         telemetry.addLine("Roadrunner Initialized");
         telemetry.update();
 
-        // Change Drive Motor Modes if not autonomous
-        if (!auto) {
-            setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        } else {
-            visionProcessor = new VisionProcessor();
-            visionPortal = VisionPortal.easyCreateWithDefaults(webcam, visionProcessor);
-        }
-
         // Motors
         liftMotor = hardwareMap.get(DcMotorEx.class, names.liftMotor);
         hangMotor = hardwareMap.get(DcMotorEx.class, names.hangMotor);
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hangMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hangMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         telemetry.addLine("Motors Initialized");
         telemetry.update();
@@ -72,6 +66,16 @@ public class Attachments extends SampleMecanumDrive {
 
         telemetry.addLine("Camera Initialized");
         telemetry.update();
+
+        // Change Drive Motor Modes if not autonomous
+        if (!auto) {
+            setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        } else {
+            visionProcessor = new VisionProcessor();
+            visionPortal = VisionPortal.easyCreateWithDefaults(webcam, visionProcessor);
+        }
 
     }
 
