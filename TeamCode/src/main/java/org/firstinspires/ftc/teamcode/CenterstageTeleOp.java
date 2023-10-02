@@ -95,14 +95,35 @@ public class CenterstageTeleOp extends OpMode {
             clawPosition = Constants.clawClose;
         }
 
-        if (gamepad2.a) {
+        if (gamepad2.b) {
             clawArmPosition = Constants.clawArmUp;
-        } else if (gamepad2.b) {
+        } else if (gamepad2.a) {
             clawArmPosition = Constants.clawArmDown;
         }
 
         if (gamepad2.x || gamepad1.x) {
             planePosition = Constants.planeRelease;
+        }
+
+        if (gamepad2.dpad_up) {
+            targetLiftPosition = Constants.liftHigh;
+        } else if (gamepad2.dpad_down) {
+            targetLiftPosition = Constants.liftLow;
+        }
+
+        if (gamepad2.y) {
+            targetHangPosition = Constants.hangHigh;
+        } else if (gamepad2.x) {
+            targetHangPosition = Constants.hangLow;
+        }
+
+
+        if (gamepad2.dpad_left) {
+            targetLiftPosition = Constants.liftHigh;
+            clawArmPosition = Constants.clawArmUp;
+        } else if (gamepad2.dpad_right) {
+            targetLiftPosition = Constants.liftLow;
+            clawArmPosition = Constants.clawArmDown;
         }
 
 
@@ -279,6 +300,5 @@ public class CenterstageTeleOp extends OpMode {
             robot.runHangMotor(0);
         }
     }
-
 
 }

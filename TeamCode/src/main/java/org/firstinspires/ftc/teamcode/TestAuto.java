@@ -7,12 +7,14 @@ import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstra
 import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TranslationalVelocityConstraint;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.AutonomousMethods;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 
 import java.util.Arrays;
 
+@Autonomous(name="TestAuto", group="Linear Opmode")
 public class TestAuto extends AutonomousMethods {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,8 +28,8 @@ public class TestAuto extends AutonomousMethods {
                 new AngularVelocityConstraint(16)
         ));
 
-        PoseConstants.redLeft startPose = new PoseConstants.redLeft();
-        robot.setPoseEstimate(PoseConstants.redLeft.start);
+        PoseConstants.blueRight startPose = new PoseConstants.blueRight();
+        robot.setPoseEstimate(PoseConstants.blueRight.start);
 
 
         // Wait for start button to be pressed
@@ -43,13 +45,13 @@ public class TestAuto extends AutonomousMethods {
         telemetry.addLine("Location: " + propLocation);
         telemetry.update();
 
-        dropPixel(propLocation, "redLeft");
+        dropPixel(propLocation, "blueRight");
 
-        Trajectory backdropTraj = robot.trajectoryBuilder(robot.getPoseEstimate())
-                .splineTo(startPose.backdrop, Math.toRadians(0))
-                .build();
-
-        robot.followTrajectory(backdropTraj);
+//        Trajectory backdropTraj = robot.trajectoryBuilder(robot.getPoseEstimate())
+//                .splineTo(startPose.backdrop, Math.toRadians(0))
+//                .build();
+//
+//        robot.followTrajectory(backdropTraj);
 
     }
 }
